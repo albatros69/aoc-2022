@@ -14,7 +14,7 @@ corresp = {
 scores = dict(zip("RPS", (1,2,3)))
 wins = (("R", "S"), ("S", "P"), ("P", "R"))
 
-def round(a, b):
+def round_score(a, b):
     if (a, b) in wins:
         return 0 + scores[b]
     elif (b, a) in wins:
@@ -24,7 +24,7 @@ def round(a, b):
 
 total = 0
 for (elve, me) in lines:
-    total += round(corresp[elve], corresp[me])
+    total += round_score(corresp[elve], corresp[me])
 
 print("Part 1:", total)
 
@@ -40,6 +40,6 @@ def corresp_part2(elve, outcome):
 
 total = 0
 for (elve, outcome) in lines:
-    total += round(corresp[elve], corresp_part2(corresp[elve], outcome))
+    total += round_score(corresp[elve], corresp_part2(corresp[elve], outcome))
 
 print("Part 1:", total)
