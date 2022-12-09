@@ -17,7 +17,7 @@ result = 0
 for rucksack in lines:
     mid = len(rucksack)//2
     c1, c2 = rucksack[:mid], rucksack[mid:]
-    commons = set(a for a in c1 if a in c2)
+    commons = set(c1)&set(c2)
     result += sum(priority(a) for a in commons)
 print("Part 1:", result)
 
@@ -33,4 +33,3 @@ result = 0
 for r1,r2,r3 in grouper(3, lines):
     result += sum(priority(a) for a in set(r1)&set(r2)&set(r3))
 print("Part 2:", result)
-
