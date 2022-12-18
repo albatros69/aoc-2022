@@ -9,7 +9,7 @@ lines = []
 for line in sys.stdin:
     lines.append(line.rstrip('\n'))
 
-@dataclass(order=True, frozen=True)
+@dataclass(frozen=True)
 class Droplet():
     x: int
     y: int

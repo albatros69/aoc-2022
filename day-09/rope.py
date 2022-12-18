@@ -16,9 +16,9 @@ def move_head(pos: complex, dir: str):
         case 'L':
             mov = -1
         case 'U':
-            mov = complex('1j')
+            mov = 1j
         case 'D':
-            mov = complex('-1j')
+            mov = -1j
 
     return pos + mov
 
@@ -37,8 +37,8 @@ def move_tail(pos_head: complex, pos_tail: complex):
     return pos_tail
 
 
-head = complex(0, 0)
-tail = complex(0, 0)
+head = 0j
+tail = 0j
 grid = defaultdict(int)
 grid[0,0] += 1
 
@@ -50,7 +50,7 @@ for (mov, cpt) in (l.split() for l in lines):
 
 print("Part 1:", sum(grid[i,j]>0 for (i,j) in grid))
 
-rope = [ complex(0,0), ] * 10
+rope = [ 0j, ] * 10
 grid = defaultdict(int)
 grid[0,0] += 1
 
