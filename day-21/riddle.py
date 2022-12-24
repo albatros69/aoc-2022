@@ -39,35 +39,35 @@ def solve(m):
 print("Part 1:", solve('root'))
 
 
-def inv_ope(m, n):
-    (m1, op, m2) = monkeys[n]
+def inv_ope(m, parent):
+    (m1, op, m2) = monkeys[parent]
     match op:
         case '+':
             if m == m1:
-                return (n, '-', m2)
+                return (parent, '-', m2)
             else:
-                return (n, '-', m1)
+                return (parent, '-', m1)
         case '-':
             if m == m1:
-                return (n, '+', m2)
+                return (parent, '+', m2)
             else:
-                return (m1, '-', n)
+                return (m1, '-', parent)
         case '*':
             if m == m1:
-                return (n, '/', m2)
+                return (parent, '/', m2)
             else:
-                return (n, '/', m1)
+                return (parent, '/', m1)
         case '/':
             if m == m1:
-                return (n, '*', m2)
+                return (parent, '*', m2)
             else:
-                return (m1, '/', n)
+                return (m1, '/', parent)
 
-new_monkeys = {}
+parent_monkeys = {}
 for m, t in monkeys.items():
     # Register which is the parent operation of a monkey
-    new_monkeys[t[0]] = m
-    new_monkeys[t[2]] = m
+    parent_monkeys[t[0]] = m
+    parent_monkeys[t[2]] = m
 # To forget the number yelled in Part 1
 del nb_monkeys['humn']
 
@@ -76,15 +76,15 @@ def rev_solve(m):
     if m in nb_monkeys:
         return nb_monkeys[m]
     else:
-        n = new_monkeys[m]
-        if n == 'root':
-            (m1, _, m2) = monkeys[n]
+        parent = parent_monkeys[m]
+        if parent == 'root':
+            (m1, _, m2) = monkeys[parent]
             return solve(m2) if m1 == m else solve(m1)
 
-        (m1, op, m2) = inv_ope(m, n)
+        (m1, op, m2) = inv_ope(m, parent)
         return ope(
-            rev_solve(m1) if m1==n else solve(m1),
+            rev_solve(m1) if m1==parent else solve(m1),
             op,
-            rev_solve(m2) if m2==n else solve(m2))
+            rev_solve(m2) if m2==parent else solve(m2))
 
 print("Part 2:", rev_solve('humn'))
